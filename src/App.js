@@ -3,10 +3,7 @@ import {Client as Styletron} from 'styletron-engine-atomic';
 import {Provider as StyletronProvider} from 'styletron-react';
 import {LightTheme, BaseProvider, DarkTheme, ThemeProvider} from 'baseui';
 import {Button} from 'baseui/button';
-
 import userData from "./apollo/userData";
-
-import Context from "./Components/Context";
 
 
 const engine = new Styletron();
@@ -16,19 +13,14 @@ const THEME = {
 };
 
 function App() {
-  const [data, setData] = useState(userData);
-  const [theme, setTheme] = React.useState(THEME.light);
+ 
+  const [theme, setTheme] = useState(THEME.light);
 
 
-  const contextValue = {
-    data,
-    setData,
-  };
 
   return (
       <StyletronProvider value={engine}>
           <BaseProvider>
-               <Context.Provider value={contextValue}>
                  <ThemeProvider theme={theme === THEME.light ? LightTheme : DarkTheme}>
                  <h1>Hello .....</h1>
                   <Button
@@ -39,7 +31,6 @@ function App() {
                     Toggle light/dark theme!
                   </Button>
                 </ThemeProvider>
-                </Context.Provider>
           </BaseProvider>
       </StyletronProvider>
   );
